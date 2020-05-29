@@ -53,12 +53,13 @@ export default class Snake {
     ctx.fillStyle = "#f00";
 
     this.tail.map((_, index) => {
-      return ctx.fillRect(
-        this.tail[index].x,
-        this.tail[index].y,
-        this.side,
-        this.side
-      );
+      if (_ != undefined)
+        return ctx.fillRect(
+          this.tail[index].x,
+          this.tail[index].y,
+          this.side,
+          this.side
+        );
     });
 
     ctx.fillRect(this.position.x, this.position.y, this.side, this.side);
@@ -67,7 +68,10 @@ export default class Snake {
   update() {
     this.tail.map((_, index) => (this.tail[index] = this.tail[index + 1]));
 
-    this.tail[this.total - 1] = { x: this.position.x, y: this.position.y };
+    this.tail[this.fruitsEaten - 1] = {
+      x: this.position.x,
+      y: this.position.y,
+    };
 
     this.position.x += this.xSpeed;
     this.position.y += this.ySpeed;

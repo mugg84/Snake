@@ -262,7 +262,7 @@ var Snake = /*#__PURE__*/function () {
 
       ctx.fillStyle = "#f00";
       this.tail.map(function (_, index) {
-        return ctx.fillRect(_this.tail[index].x, _this.tail[index].y, _this.side, _this.side);
+        if (_ != undefined) return ctx.fillRect(_this.tail[index].x, _this.tail[index].y, _this.side, _this.side);
       });
       ctx.fillRect(this.position.x, this.position.y, this.side, this.side);
     }
@@ -274,7 +274,7 @@ var Snake = /*#__PURE__*/function () {
       this.tail.map(function (_, index) {
         return _this2.tail[index] = _this2.tail[index + 1];
       });
-      this.tail[this.total - 1] = {
+      this.tail[this.fruitsEaten - 1] = {
         x: this.position.x,
         y: this.position.y
       };
@@ -447,7 +447,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60568" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64195" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
