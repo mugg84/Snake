@@ -1,0 +1,13 @@
+body {
+	font-family: sans-serif;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#gameScreen {
+	border: 1px solid black;
+}
+
+
+/*# sourceMappingURL=/src.a2b27638.css.map */
