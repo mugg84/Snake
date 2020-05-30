@@ -207,17 +207,17 @@ var Snake = /*#__PURE__*/function () {
   function Snake(gameWidth, gameHeight, fruit) {
     _classCallCheck(this, Snake);
 
-    this.side = 10;
+    this.side = 20;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.speed = 10;
+    this.speed = 20;
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.fruitsEaten = 0;
     this.tail = [];
     this.position = {
-      x: Math.floor((gameWidth / 2 - this.side / 2) / 10) * 10,
-      y: Math.floor((gameHeight / 2 - this.side / 2) / 10) * 10
+      x: Math.floor((gameWidth / 2 - this.side / 2) / this.side) * this.side,
+      y: Math.floor((gameHeight / 2 - this.side / 2) / this.side) * this.side
     };
   }
 
@@ -267,12 +267,25 @@ var Snake = /*#__PURE__*/function () {
       ctx.fillRect(this.position.x, this.position.y, this.side, this.side);
     }
   }, {
-    key: "update",
-    value: function update() {
+    key: "hit",
+    value: function hit() {
       var _this2 = this;
 
+      return this.tail.some(function (block) {
+        if (block != undefined) {
+          if (block.x === _this2.position.x && block.y === _this2.position.y) {
+            return true;
+          }
+        }
+      });
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      var _this3 = this;
+
       this.tail.map(function (_, index) {
-        return _this2.tail[index] = _this2.tail[index + 1];
+        return _this3.tail[index] = _this3.tail[index + 1];
       });
       this.tail[this.fruitsEaten - 1] = {
         x: this.position.x,
@@ -349,12 +362,12 @@ var Fruit = /*#__PURE__*/function () {
   function Fruit(gameWidth, gameHeight) {
     _classCallCheck(this, Fruit);
 
-    this.side = 10;
+    this.side = 20;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.position = {
-      x: Math.floor(Math.random() * gameWidth / 10) * 10,
-      y: Math.floor(Math.random() * gameHeight / 10) * 10
+      x: Math.floor(Math.random() * gameWidth / this.side) * this.side,
+      y: Math.floor(Math.random() * gameHeight / this.side) * this.side
     };
   }
 
@@ -362,8 +375,8 @@ var Fruit = /*#__PURE__*/function () {
     key: "newPosition",
     value: function newPosition() {
       this.position = {
-        x: Math.floor(Math.random() * this.gameWidth / 10) * 10,
-        y: Math.floor(Math.random() * this.gameHeight / 10) * 10
+        x: Math.floor(Math.random() * this.gameWidth / this.side) * this.side,
+        y: Math.floor(Math.random() * this.gameHeight / this.side) * this.side
       };
     }
   }, {
@@ -393,29 +406,48 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var canvas = document.getElementById("gameScreen");
 var ctx = canvas.getContext("2d");
-var GAME_WIDTH = 800;
-var GAME_HEIGHT = 600;
-ctx.clearRect(0, 0, 800, 60);
+var GAME_WIDTH = 780;
+var GAME_HEIGHT = 580;
+var isPlaying = true;
+ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 var fruit = new _fruit.default(GAME_WIDTH, GAME_HEIGHT);
 var snake = new _snake.default(GAME_WIDTH, GAME_HEIGHT, fruit);
 new _input.default(snake);
+
+function gameOver() {
+  ctx.rect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+  ctx.fillStyle = "#000";
+  ctx.fill();
+  ctx.font = "30px Arial";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText("Game Over", GAME_WIDTH / 2, GAME_HEIGHT / 2);
+  isPlaying = false;
+}
+
 var lastTime = 0;
 
 function gameLoop(timeStamp) {
-  setTimeout(function () {
-    var deltaTime = timeStamp - lastTime;
-    lastTime = timeStamp;
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    fruit.draw(ctx);
-    snake.update(deltaTime);
-    snake.draw(ctx);
+  if (isPlaying) {
+    setTimeout(function () {
+      var deltaTime = timeStamp - lastTime;
+      lastTime = timeStamp;
+      ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+      fruit.draw(ctx);
+      snake.update(deltaTime);
+      snake.draw(ctx);
 
-    if (snake.eat(fruit)) {
-      fruit.newPosition();
-    }
+      if (snake.eat(fruit)) {
+        fruit.newPosition();
+      }
 
-    requestAnimationFrame(gameLoop);
-  }, 200);
+      if (snake.hit()) {
+        gameOver();
+      }
+
+      requestAnimationFrame(gameLoop);
+    }, 100);
+  }
 }
 
 requestAnimationFrame(gameLoop);
@@ -447,7 +479,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64195" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52839" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

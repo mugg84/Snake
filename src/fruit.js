@@ -1,20 +1,20 @@
 export default class Fruit {
   constructor(gameWidth, gameHeight) {
-    this.side = 10;
+    this.side = 20;
 
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
 
     this.position = {
-      x: Math.floor((Math.random() * gameWidth) / 10) * 10,
-      y: Math.floor((Math.random() * gameHeight) / 10) * 10,
+      x: Math.floor((Math.random() * gameWidth) / this.side) * this.side,
+      y: Math.floor((Math.random() * gameHeight) / this.side) * this.side,
     };
   }
 
   newPosition() {
     this.position = {
-      x: Math.floor((Math.random() * this.gameWidth) / 10) * 10,
-      y: Math.floor((Math.random() * this.gameHeight) / 10) * 10,
+      x: Math.floor((Math.random() * this.gameWidth) / this.side) * this.side,
+      y: Math.floor((Math.random() * this.gameHeight) / this.side) * this.side,
     };
   }
 

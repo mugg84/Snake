@@ -1,11 +1,11 @@
 export default class Snake {
   constructor(gameWidth, gameHeight, fruit) {
-    this.side = 10;
+    this.side = 20;
 
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
 
-    this.speed = 10;
+    this.speed = 20;
     this.xSpeed = 0;
     this.ySpeed = 0;
 
@@ -13,8 +13,8 @@ export default class Snake {
     this.tail = [];
 
     this.position = {
-      x: Math.floor((gameWidth / 2 - this.side / 2) / 10) * 10,
-      y: Math.floor((gameHeight / 2 - this.side / 2) / 10) * 10,
+      x: Math.floor((gameWidth / 2 - this.side / 2) / this.side) * this.side,
+      y: Math.floor((gameHeight / 2 - this.side / 2) / this.side) * this.side,
     };
   }
 
@@ -63,6 +63,16 @@ export default class Snake {
     });
 
     ctx.fillRect(this.position.x, this.position.y, this.side, this.side);
+  }
+
+  hit() {
+    return this.tail.some((block) => {
+      if (block != undefined) {
+        if (block.x === this.position.x && block.y === this.position.y) {
+          return true;
+        }
+      }
+    });
   }
 
   update() {
