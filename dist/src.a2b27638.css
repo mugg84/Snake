@@ -1,12 +1,16 @@
 body {
+  height: 100vh;
+  margin: 0;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 }
 
 #gameScreen {
-  border: 20px solid black;
+  height: 540px;
+  width: 540px;
+  border: 10px solid black;
 }
 
 

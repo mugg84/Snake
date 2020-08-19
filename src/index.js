@@ -6,8 +6,8 @@ import Fruit from "./fruit";
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
 
-const GAME_WIDTH = 780;
-const GAME_HEIGHT = 580;
+const GAME_WIDTH = 540;
+const GAME_HEIGHT = 540;
 let isPlaying = true;
 
 ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);

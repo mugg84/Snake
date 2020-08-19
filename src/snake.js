@@ -1,5 +1,5 @@
 export default class Snake {
-  constructor(gameWidth, gameHeight, fruit) {
+  constructor(gameWidth, gameHeight) {
     this.side = 20;
 
     this.gameWidth = gameWidth;

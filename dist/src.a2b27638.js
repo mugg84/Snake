@@ -204,7 +204,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Snake = /*#__PURE__*/function () {
-  function Snake(gameWidth, gameHeight, fruit) {
+  function Snake(gameWidth, gameHeight) {
     _classCallCheck(this, Snake);
 
     this.side = 20;
@@ -406,8 +406,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var canvas = document.getElementById("gameScreen");
 var ctx = canvas.getContext("2d");
-var GAME_WIDTH = 780;
-var GAME_HEIGHT = 580;
+var GAME_WIDTH = 540;
+var GAME_HEIGHT = 540;
 var isPlaying = true;
 ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 var fruit = new _fruit.default(GAME_WIDTH, GAME_HEIGHT);
@@ -479,7 +479,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52839" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51114" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
